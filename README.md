@@ -1,4 +1,4 @@
-Opis
+
 Aplikacja to zaawansowany system zarządzania wypożyczalnią samochodów, który
 umożliwia użytkownikom rezerwację pojazdów, śledzenie historii rezerwacji, a także
 zarządzanie flotą samochodową. System jest zaprojektowany z myślą o dostarczaniu
