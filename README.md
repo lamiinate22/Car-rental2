@@ -1,113 +1,69 @@
 
-Aplikacja to zaawansowany system zarządzania wypożyczalnią samochodów, który
-umożliwia użytkownikom rezerwację pojazdów, śledzenie historii rezerwacji, a także
-zarządzanie flotą samochodową. System jest zaprojektowany z myślą o dostarczaniu
-intuicyjnego interfejsu użytkownika oraz solidnego zaplecza administracyjnego, które
-umożliwia zarządzanie rezerwacjami, użytkownikami i opcjami dodatkowymi. Aplikacja
-wspiera również logowanie i autoryzację użytkowników, zapewniając bezpieczeństwo i
-integralność danych.
+# Car Rental | Web Application
 
-Główne komponenty aplikacji
-Rezerwacja samochodów: Użytkownicy mogą przeglądać dostępne samochody, wybierać
-daty wynajmu, oraz dodawać opcje dodatkowe takie jak GPS, foteliki dziecięce czy
-dodatkowi kierowcy. Po dokonaniu rezerwacji użytkownik otrzymuje szczegółowe informacje
-o swojej rezerwacji.
-Zarządzanie użytkownikami: Administratorzy mogą zarządzać użytkownikami, dodawać
-nowych użytkowników, aktualizować ich dane oraz usuwać konta. Aplikacja wspiera rolę
-administratora, która ma dostęp do dodatkowych funkcjonalności administracyjnych.
-Zarządzanie flotą samochodową: Administratorzy mogą dodawać nowe samochody do
-floty, aktualizować ich dane techniczne, stan dostępności, oraz usuwać samochody z
-systemu.
-Opcje dodatkowe: Użytkownicy mogą dodawać różne opcje dodatkowe do swoich
-rezerwacji. Administratorzy mogą zarządzać tymi opcjami, dodając nowe, aktualizując
-istniejące i usuwając niepotrzebne.
+Car Rental is an advanced car rental management system that allows users to book vehicles, track their reservation history, and manage the fleet. The system is designed to offer an intuitive user interface alongside a robust administrative backend, enabling efficient management of reservations, users, and additional rental options. The application also supports user authentication and authorization, ensuring data security and integrity.
 
-Architektura aplikacji
+## Key Components of the Car Rental System
 
-Aplikacja składa się z front-endu oraz back-endu. Front-end zrealizowany jest w technologii
-Vaadin, co umożliwia tworzenie interaktywnych i dynamicznych interfejsów użytkownika bez
-konieczności korzystania z JavaScript. Back-end oparty jest na Spring Boot, zapewniając
-solidne i skalowalne zaplecze serwerowe, zarządzanie bazą danych oraz usługi RESTful
-API.
+- **Car Reservation**: Users can browse available cars, select rental dates, and add extra options such as GPS, child seats, or additional drivers. After booking, users receive detailed information about their reservation.
+- **User Management**: Administrators can manage users, add new ones, update user data, and delete accounts. The system supports an administrator role with access to additional administrative functionalities.
+- **Fleet Management**: Administrators can add new cars to the fleet, update their technical data and availability, and remove cars from the system.
+- **Additional Options**: Users can add various extra options to their bookings. Administrators can manage these options, adding new ones, updating existing ones, or removing unnecessary options.
 
-Proces rezerwacji
-1. Wybór samochodu: Użytkownik przegląda dostępne samochody i wybiera ten, który
-chce wynająć.
-2. Wybór dat rezerwacji: Użytkownik wybiera daty rozpoczęcia i zakończenia
-rezerwacji.
-3. Dodanie opcji dodatkowych: Użytkownik wybiera opcje dodatkowe, które chce
-dodać do rezerwacji (np. GPS, fotelik dziecięcy).
-4. Zatwierdzenie rezerwacji: Po wypełnieniu wszystkich wymaganych pól, użytkownik
-zatwierdza rezerwację. System oblicza całkowitą cenę rezerwacji i zapisuje dane w
-bazie danych.
-5. Wyświetlenie szczegółów rezerwacji: Po zatwierdzeniu rezerwacji użytkownik
-otrzymuje szczegółowe informacje o swojej rezerwacji, które są wyświetlane na
-stronie.
+## Application Architecture
 
-Lista technologii i języków użytych w projekcie
-1. Java: Główny język programowania używany do tworzenia logiki aplikacji oraz
-integracji z bazą danych.
-2. Spring Boot: Framework używany do tworzenia aplikacji back-endowej. Oferuje
-wsparcie dla tworzenia RESTful API, zarządzania zależnościami oraz integracji z
-bazą danych.
-3. Vaadin: Framework front-endowy do tworzenia dynamicznych i interaktywnych
-interfejsów użytkownika w Javie.
-4. MySQL: System zarządzania bazą danych używany do przechowywania danych
-aplikacji, takich jak użytkownicy, rezerwacje, samochody i opcje dodatkowe.
-5. Hibernate: Framework ORM (Object-Relational Mapping) używany do mapowania
-obiektów Java na relacyjne struktury bazy danych.
-6. Maven: Narzędzie do zarządzania projektem i zależnościami.
-7. Spring Security: Używany do zarządzania bezpieczeństwem i autoryzacją
-użytkowników.
-8. Lombok: Biblioteka Java, która redukuje ilość kodu potrzebnego do tworzenia klas
-Java poprzez automatyczne generowanie getterów, setterów, konstruktorów itp.
+The application consists of a front-end and a back-end. The front-end is built with **Vaadin**, which allows for the creation of interactive and dynamic user interfaces without the need for JavaScript. The back-end is based on **Spring Boot**, providing a solid and scalable server-side solution, database management, and RESTful API services.
 
-Lista funkcjonalności
-Funkcjonalności użytkowników
-1. Rejestracja użytkownika: Nowi użytkownicy mogą rejestrować się w systemie,
-podając swoje dane osobowe i informacje logowania.
-2. Logowanie: Zarejestrowani użytkownicy mogą logować się do systemu.
-3. Przeglądanie dostępnych samochodów: Użytkownicy mogą przeglądać listę
-dostępnych samochodów do wynajęcia.
-4. Rezerwacja samochodów: Użytkownicy mogą rezerwować wybrane samochody na
-określony czas, wybierając daty rezerwacji oraz opcje dodatkowe.
-5. Wyświetlanie szczegółów rezerwacji: Po dokonaniu rezerwacji, użytkownicy mogą
-wyświetlać szczegóły swojej rezerwacji, w tym daty wynajmu, całkowitą cenę, oraz
-dodane opcje dodatkowe.
-6. Wyświetlanie rodzajów paliw i ich cen w każdym województwie
-Funkcjonalności administracyjne
-1. Zarządzanie użytkownikami: Administratorzy mogą dodawać, edytować i usuwać
-użytkowników, a także przypisywać im role administracyjne.
-2. Zarządzanie samochodami: Administratorzy mogą dodawać nowe samochody do
-floty, edytować dane techniczne istniejących samochodów oraz usuwać samochody
-z systemu.
-3. Zarządzanie rezerwacjami: Administratorzy mogą przeglądać, edytować i usuwać
-rezerwacje, a także kończyć rezerwacje, aktualizując stan samochodów i naliczając
-dodatkowe opłaty.
-Dodatkowe funkcjonalności
-1. Wyliczanie całkowitej ceny rezerwacji: System automatycznie oblicza całkowitą
-cenę rezerwacji na podstawie długości wynajmu, ceny samochodu za dzień oraz cen
-wybranych opcji dodatkowych.
-2. Aktualizacja stanu samochodu: Po zakończeniu rezerwacji, system automatycznie
-aktualizuje stan samochodu, w tym przebieg i dostępność.
-3. Bezpieczeństwo danych: Aplikacja zapewnia bezpieczeństwo danych
-użytkowników poprzez mechanizmy autoryzacji i autentykacji, oraz szyfrowanie
-danych wrażliwych.
-4. Obsługa różnych typów paliw: System uwzględnia różne typy paliw podczas
-obliczania kosztów rezerwacji, bazując na aktualnych cenach paliw w różnych
-regionach.
-5. Intuicyjny interfejs użytkownika: Dzięki zastosowaniu Vaadin, aplikacja oferuje
-nowoczesny, intuicyjny interfejs użytkownika, który ułatwia korzystanie z systemu
-zarówno użytkownikom, jak i administratorom.
+## Reservation Process
 
-Integracja z zewnętrznymi serwisami
-1. Pobieranie aktualnych cen paliw: System integruje się z zewnętrznymi serwisami
-w celu pobierania aktualnych cen paliw, które są używane do obliczania kosztów
-rezerwacji.
+1. **Car Selection**: Users browse available cars and choose the one they want to rent.
+2. **Date Selection**: Users select the start and end dates for the rental.
+3. **Add Extra Options**: Users choose additional options like GPS or child seats to add to their reservation.
+4. **Reservation Confirmation**: After filling in all required fields, users confirm the reservation. The system calculates the total rental price and saves the details to the database.
+5. **Reservation Details**: After confirming the booking, users receive detailed information about their reservation displayed on the page.
 
-Testowanie i dokumentacja
-1. Testy jednostkowe i integracyjne: Aplikacja zawiera szeroki zestaw testów
-jednostkowych i integracyjnych, które zapewniają poprawność działania wszystkich
-komponentów.
-2. Dokumentacja API: Aplikacja jest wyposażona w dokumentację API, która
-umożliwia deweloperom łatwe zrozumienie i integrację z systemem.
+## List of Technologies and Languages Used
+
+- **Java**: The main programming language used for building the application's logic and database integration.
+- **Spring Boot**: A framework used to develop the back-end application. It provides support for creating RESTful APIs, dependency management, and database integration.
+- **Vaadin**: A front-end framework used to build dynamic and interactive user interfaces in Java.
+- **MySQL**: A database management system used to store application data such as users, reservations, cars, and extra options.
+- **Hibernate**: An ORM (Object-Relational Mapping) framework used for mapping Java objects to relational database structures.
+- **Maven**: A project management and dependency management tool.
+- **Spring Security**: Used to manage user authentication and authorization.
+- **Lombok**: A Java library that reduces boilerplate code by automatically generating getters, setters, constructors, etc.
+
+## List of Features
+
+### User Features
+
+- **User Registration**: New users can register by providing their personal and login details.
+- **Login**: Registered users can log into the system.
+- **View Available Cars**: Users can browse a list of available cars for rent.
+- **Car Reservation**: Users can book selected cars for a specific period, choosing rental dates and additional options.
+- **View Reservation Details**: After booking, users can view the details of their reservation, including rental dates, total price, and selected extra options.
+- **Display Fuel Types and Prices by Region**: Users can view the types of fuel and their prices in different regions.
+
+### Administrative Features
+
+- **User Management**: Administrators can add, edit, and delete users, as well as assign administrative roles.
+- **Car Management**: Administrators can add new cars to the fleet, edit technical details of existing cars, and remove cars from the system.
+- **Reservation Management**: Administrators can view, edit, and delete reservations, as well as finalize bookings by updating the status of the cars and applying additional charges.
+
+## Additional Features
+
+- **Calculate Total Reservation Price**: The system automatically calculates the total price of the reservation based on the rental period, daily car rate, and prices of selected extra options.
+- **Car Status Update**: After the reservation ends, the system automatically updates the car's status, including mileage and availability.
+- **Data Security**: The application ensures data security through authorization and authentication mechanisms, as well as encryption of sensitive data.
+- **Fuel Type Management**: The system considers various fuel types when calculating reservation costs, based on the latest fuel prices across different regions.
+- **Intuitive User Interface**: Thanks to Vaadin, the application offers a modern, intuitive user interface that simplifies system usage for both users and administrators.
+
+## External Integrations
+
+- **Fuel Price Updates**: The system integrates with external services to fetch up-to-date fuel prices, which are used in calculating reservation costs.
+
+## Testing and Documentation
+
+- **Unit and Integration Tests**: The application includes a comprehensive set of unit and integration tests to ensure the correct functioning of all components.
+- **API Documentation**: The application is equipped with API documentation, making it easy for developers to understand and integrate with the system.
+
