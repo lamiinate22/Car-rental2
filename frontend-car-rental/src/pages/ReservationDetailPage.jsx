@@ -11,6 +11,7 @@ export default function ReservationDetailPage() {
   const [reservation, setReservation] = useState(null);
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     api.getReservation(id)
@@ -19,14 +20,15 @@ export default function ReservationDetailPage() {
         return api.getCar(res.carId);
       })
       .then(setCar)
-      .catch(() => {})
+      .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) return <LoadingSpinner />;
+  if (error) return <p className="empty-state">Nie udało się załadować rezerwacji. Sprawdź połączenie z backendem.</p>;
   if (!reservation) return <p className="empty-state">Nie znaleziono rezerwacji.</p>;
 
-  const days = Math.max(1, Math.round(
+  const days = Math.max(0, Math.round(
     (new Date(reservation.endDate) - new Date(reservation.startDate)) / 86400000
   ));
 

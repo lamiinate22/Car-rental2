@@ -59,8 +59,8 @@ export default function FuelPricesPage() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((p, i) => (
-                <tr key={i}>
+              {filtered.map((p) => (
+                <tr key={`${p.region}-${p.fuelType}`}>
                   <td>{p.region}</td>
                   <td><span className="fuel-tag">{p.fuelType}</span></td>
                   <td className="fuel-price">{p.price?.toFixed(2)} zł/l</td>

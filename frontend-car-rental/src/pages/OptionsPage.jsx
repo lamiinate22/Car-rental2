@@ -7,6 +7,7 @@ import './OptionsPage.css';
 export default function OptionsPage() {
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [toDelete, setToDelete] = useState(null);
   const [form, setForm] = useState({ name: '', price: '' });
   const [saving, setSaving] = useState(false);
@@ -17,7 +18,9 @@ export default function OptionsPage() {
 
   async function load() {
     setLoading(true);
+    setLoadError('');
     try { setOptions(await api.getOptions()); }
+    catch { setLoadError('Nie udało się pobrać opcji.'); }
     finally { setLoading(false); }
   }
 
@@ -56,6 +59,7 @@ export default function OptionsPage() {
         </div>
       </div>
 
+      {loadError && <p className="error-banner">{loadError}</p>}
       {deleteError && <p className="error-banner">{deleteError}</p>}
 
       <div className="options-layout">

@@ -105,7 +105,7 @@ export default function NewReservationPage() {
             <div className="field-row">
               <div className="field">
                 <label className="field__label">Data od</label>
-                <input type="date" className="field__input" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />
+                <input type="date" className="field__input" value={startDate} min={new Date().toISOString().split('T')[0]} onChange={(e) => setStartDate(e.target.value)} required />
               </div>
               <div className="field">
                 <label className="field__label">Data do</label>
