@@ -1,0 +1,31 @@
+.res-row {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.res-row:hover td {
+  background: var(--bg);
+}
+
+.res-row__id {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.res-row__dates {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.res-row__days {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.res-row__price {
+  font-weight: 700;
+  color: var(--text);
+}

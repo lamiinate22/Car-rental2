@@ -52,6 +52,10 @@ public class ReservationService {
         reservation.setUser(user);
         reservation.setCar(car);
 
+        // Oznacz samochód jako niedostępny
+        car.setAvailability(false);
+        carRepository.save(car);
+
         // Zapisz rezerwację
         reservationRepository.save(reservation);
     }
@@ -188,7 +192,26 @@ public class ReservationService {
     }
 
     public void deleteReservation(Long id) {
+        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found"));
+        Car car = reservation.getCar();
+        if (car != null) {
+            car.setAvailability(true);
+            carRepository.save(car);
+        }
         reservationRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteAllReservations() {
+        List<Reservation> reservations = reservationRepository.findAll();
+        for (Reservation reservation : reservations) {
+            Car car = reservation.getCar();
+            if (car != null) {
+                car.setAvailability(true);
+                carRepository.save(car);
+            }
+        }
+        reservationRepository.deleteAll();
     }
 
     @Transactional(readOnly = true)

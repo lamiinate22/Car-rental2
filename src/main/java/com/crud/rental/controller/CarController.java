@@ -20,12 +20,16 @@ import java.util.List;
 public class CarController {
     private final CarService carService;
     private final CarMapper carMapper;
-    @GetMapping("/{available}")
+    @GetMapping("/available")
     public ResponseEntity<List<CarDto>> getAvailableCars(){
         List<Car> availableCars = carService.getAvailableCars();
         List<CarDto> availableCarDtos = carMapper.mapToCarDtoList(availableCars);
         return ResponseEntity.ok(availableCarDtos);
+    }
 
+    @GetMapping("/{carId}")
+    public ResponseEntity<CarDto> getCarById(@PathVariable Long carId) throws CarNotFoundException {
+        return ResponseEntity.ok(carMapper.mapToCarDto(carService.getCarById(carId)));
     }
     @GetMapping
     public ResponseEntity<List<CarDto>> getAllCars(){

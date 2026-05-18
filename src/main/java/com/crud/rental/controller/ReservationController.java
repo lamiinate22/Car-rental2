@@ -57,6 +57,12 @@ public class ReservationController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllReservations() {
+        reservationService.deleteAllReservations();
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/add/{reservationId}/{carId}")
     public ResponseEntity<ReservationDto> addCarToReservation(@PathVariable Long reservationId, @PathVariable Long carId) throws ReservationNotFoundException {
         Reservation reservation = reservationService.getReservation(reservationId);
