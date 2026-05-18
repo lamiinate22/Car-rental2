@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/reservations")
@@ -20,6 +22,12 @@ public class ReservationController {
     private ReservationService reservationService;
     @Autowired
     private ReservationMapper reservationMapper;
+
+    @GetMapping
+    public ResponseEntity<List<ReservationDto>> getAllReservations() {
+        List<ReservationDto> reservations = reservationMapper.mapToReservationDtoList(reservationService.findAll());
+        return ResponseEntity.ok(reservations);
+    }
 
     @PostMapping
     public ResponseEntity<Void> addReservation(@RequestBody ReservationDto reservationDto) {
