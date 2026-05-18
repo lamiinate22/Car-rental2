@@ -1,16 +1,13 @@
 package com.crud.rental.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
-    private long id;
+public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String username;
-    private boolean isAdmin;
+    private String password;
 }
