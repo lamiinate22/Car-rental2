@@ -8,8 +8,10 @@ import com.crud.rental.exception.UserNotFoundException;
 import com.crud.rental.mapper.UserMapper;
 import com.crud.rental.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,8 +29,15 @@ public class UserController {
         return ResponseEntity.ok(userMapper.mapToUserDtoList(userService.getAllUsers()));
     }
 
+    private static final java.util.regex.Pattern USERNAME_PATTERN =
+            java.util.regex.Pattern.compile("^[a-zA-Z0-9_\\-]{3,30}$");
+
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody RegisterRequest request) {
+        if (!USERNAME_PATTERN.matcher(request.getUsername()).matches()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Username may only contain letters, digits, _ and - (3–30 chars)");
+        }
         User user = new User();
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());

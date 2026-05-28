@@ -14,9 +14,15 @@ export default function RegisterPage() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   }
 
+  const USERNAME_REGEX = /^[a-zA-Z0-9_-]{3,30}$/;
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
+    if (!USERNAME_REGEX.test(form.username)) {
+      setError('Login może zawierać tylko litery, cyfry, _ i - (3–30 znaków). Bez spacji i znaków specjalnych.');
+      return;
+    }
     setLoading(true);
     try {
       await register(form.firstName, form.lastName, form.username, form.password);
@@ -51,7 +57,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <label className="field__label" htmlFor="username">Login</label>
-            <input id="username" name="username" className="field__input" value={form.username} onChange={handleChange} autoComplete="username" required />
+            <input id="username" name="username" className="field__input" value={form.username} onChange={handleChange} autoComplete="username" pattern="[a-zA-Z0-9_\-]{3,30}" title="Tylko litery, cyfry, _ i - (3–30 znaków)" required />
           </div>
 
           <div className="field">
