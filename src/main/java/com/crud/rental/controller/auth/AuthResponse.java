@@ -8,8 +8,14 @@ import lombok.Getter;
 public class AuthResponse {
     @JsonProperty("token")
     private String token;
-    @JsonProperty("email")
-    private String email;
+    @JsonProperty("id")
+    private long id;
+    @JsonProperty("username")
+    private String username;
+    @JsonProperty("firstName")
+    private String firstName;
+    @JsonProperty("lastName")
+    private String lastName;
     @JsonProperty("admin")
     private boolean admin;
 }

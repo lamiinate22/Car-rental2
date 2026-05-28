@@ -14,11 +14,11 @@ export function AuthProvider({ children }) {
     }
   });
 
-  async function login(email, password) {
-    const data = await api.login({ email, password });
-    // data = { token, email, admin }
+  async function login(username, password) {
+    const data = await api.login(username, password);
+    // data = { token, id, username, firstName, lastName, admin }
     localStorage.setItem('car_rental_token', data.token);
-    const userObj = { email: data.email, admin: data.admin };
+    const userObj = { id: data.id, username: data.username, firstName: data.firstName, lastName: data.lastName, admin: data.admin };
     localStorage.setItem('car_rental_user', JSON.stringify(userObj));
     setUser(userObj);
     return userObj;

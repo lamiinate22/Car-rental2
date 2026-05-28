@@ -45,7 +45,7 @@ public class Reservation {
     @JoinColumn(name = "CAR_ID")
     private Car car;
 
-    @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reservation", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Damage> damages;
 
 

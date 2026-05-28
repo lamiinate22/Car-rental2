@@ -6,7 +6,7 @@ import './AuthPage.css';
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +19,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      await login(form.email, form.password);
+      await login(form.username, form.password);
       navigate('/');
     } catch (err) {
       setError(err.status === 401 ? 'Nieprawidłowy login lub hasło.' : 'Błąd serwera. Spróbuj ponownie.');
@@ -39,15 +39,15 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="field">
-            <label className="field__label" htmlFor="email">E-mail</label>
+            <label className="field__label" htmlFor="username">Login</label>
             <input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="text"
               className="field__input"
-              value={form.email}
+              value={form.username}
               onChange={handleChange}
-              autoComplete="email"
+              autoComplete="username"
               required
             />
           </div>

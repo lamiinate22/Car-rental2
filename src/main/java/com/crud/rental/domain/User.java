@@ -32,7 +32,7 @@ public class User {
     @Column(name = "IS_ADMIN", nullable = false)
     private boolean isAdmin;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Reservation> reservations;
 
     public User(String firstName, String lastName) {
