@@ -43,6 +43,7 @@ dependencies {
 	implementation 'org.jsoup:jsoup:1.14.3'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'com.stripe:stripe-java:29.1.0'
+	implementation 'org.apache.httpcomponents.client5:httpclient5'
 
 }
 

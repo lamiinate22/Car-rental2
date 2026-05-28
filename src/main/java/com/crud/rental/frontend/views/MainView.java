@@ -24,6 +24,7 @@ public class MainView extends VerticalLayout {
 
         RouterLink carsLink = new RouterLink("Browse Our Cars", CarsView.class);
         RouterLink fuelPricesLink = new RouterLink("Fuel Prices", FuelPricesView.class);
+        RouterLink nbpRatesLink = new RouterLink("Exchange Rates (NBP)", NbpRateView.class);
         RouterLink rentalFormLink = new RouterLink("Rental Form", RentalFormView.class);
         RouterLink reservationsLink = new RouterLink("Reservations", AllReservationsView.class);
         RouterLink loginLink = new RouterLink("Login", LoginView.class);
@@ -37,11 +38,11 @@ public class MainView extends VerticalLayout {
         var loggedUser = VaadinSession.getCurrent().getAttribute(User.class);
         if (loggedUser != null)
         {
-            linksLayout = new HorizontalLayout(carsLink, fuelPricesLink, rentalFormLink, reservationsLink, logoutButton);
+            linksLayout = new HorizontalLayout(carsLink, fuelPricesLink, nbpRatesLink, rentalFormLink, reservationsLink, logoutButton);
         }
         else
         {
-            linksLayout = new HorizontalLayout(carsLink, fuelPricesLink, rentalFormLink, reservationsLink, loginLink, registerLink);
+            linksLayout = new HorizontalLayout(carsLink, fuelPricesLink, nbpRatesLink, rentalFormLink, reservationsLink, loginLink, registerLink);
         }
 
         linksLayout.addClassName("links-layout");

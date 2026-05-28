@@ -58,6 +58,7 @@ export const api = {
   // Fuels
   getFuelPrices: () => request('/fuels/prices'),
   getFuelTypes: () => request('/fuels/types'),
+  getNbpRate: (code) => request(`/fuels/nbp-rate/${code}`),
 
   // Payments
   createCheckoutSession: (body) => request('/payments/create-checkout-session', { method: 'POST', body: JSON.stringify(body) }),

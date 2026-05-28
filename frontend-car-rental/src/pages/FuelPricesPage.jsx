@@ -3,6 +3,41 @@ import { api } from '../api/client';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
 import './FuelPricesPage.css';
 
+function NbpRateCard({ code }) {
+  const [rate, setRate] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  function load() {
+    setLoading(true);
+    setError(false);
+    api.getNbpRate(code)
+      .then(setRate)
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => { load(); }, [code]);
+
+  return (
+    <div className="nbp-card">
+      <div className="nbp-card__code">{code}</div>
+      {loading ? (
+        <div className="nbp-card__value nbp-card__value--muted">ładowanie...</div>
+      ) : error ? (
+        <div className="nbp-card__value nbp-card__value--error">niedostępne</div>
+      ) : (
+        <>
+          <div className="nbp-card__value">{rate?.mid?.toFixed(4)} <span className="nbp-card__pln">PLN</span></div>
+          <div className="nbp-card__date">{rate?.effectiveDate}</div>
+          <div className="nbp-card__name">{rate?.currency}</div>
+        </>
+      )}
+      <button className="nbp-card__refresh" onClick={load} title="Odśwież">↻</button>
+    </div>
+  );
+}
+
 export default function FuelPricesPage() {
   const [prices, setPrices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +56,15 @@ export default function FuelPricesPage() {
 
   return (
     <div>
+      <section className="nbp-section">
+        <h2 className="nbp-section__title">Kursy walut (NBP)</h2>
+        <div className="nbp-cards">
+          {['EUR', 'USD'].map((code) => (
+            <NbpRateCard key={code} code={code} />
+          ))}
+        </div>
+      </section>
+
       <div className="page-header">
         <div>
           <h1 className="page-title">Ceny paliw</h1>
