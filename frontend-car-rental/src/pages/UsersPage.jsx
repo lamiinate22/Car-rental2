@@ -12,6 +12,15 @@ export default function UsersPage() {
   const [toDelete, setToDelete] = useState(null);
   const [error, setError] = useState('');
 
+  async function handleToggleAdmin(u) {
+    try {
+      await api.setAdminRole(u.id, !u.admin);
+      load();
+    } catch {
+      setError('Nie udało się zmienić roli użytkownika.');
+    }
+  }
+
   useEffect(() => { load(); }, []);
 
   async function load() {
@@ -67,7 +76,15 @@ export default function UsersPage() {
                       ? <span className="role-badge role-badge--admin">Admin</span>
                       : <span className="role-badge">Użytkownik</span>}
                   </td>
-                  <td>
+                  <td style={{ display: 'flex', gap: '0.5rem' }}>
+                    {u.id !== me?.id && (
+                      <button
+                        className={`btn btn--sm ${u.admin ? 'btn--secondary' : 'btn--primary'}`}
+                        onClick={() => { setError(''); handleToggleAdmin(u); }}
+                      >
+                        {u.admin ? 'Odbierz admina' : 'Nadaj admina'}
+                      </button>
+                    )}
                     {u.id !== me?.id && !u.admin && (
                       <button className="btn btn--danger btn--sm" onClick={() => { setError(''); setToDelete(u); }}>Usuń</button>
                     )}

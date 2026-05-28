@@ -7,6 +7,7 @@ import com.crud.rental.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class DatabaseSeeder {
 
     @Bean
-    CommandLineRunner initDatabase(OptionRepository optionRepository, UserRepository userRepository) {
+    CommandLineRunner initDatabase(OptionRepository optionRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (optionRepository.count() == 0) {
                 List<Option> options = List.of(
@@ -26,8 +27,9 @@ public class DatabaseSeeder {
                 optionRepository.saveAll(options);
             }
 
-            if (userRepository.count() == 0) {
-                User adminUser = new User(0L, "admin", "admin", "Admin", "User", true, null);
+            boolean adminExists = userRepository.findAll().stream().anyMatch(User::isAdmin);
+            if (!adminExists) {
+                User adminUser = new User(0L, "admin", passwordEncoder.encode("admin"), "Admin", "User", true, null);
                 userRepository.save(adminUser);
             }
         };

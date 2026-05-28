@@ -10,6 +10,7 @@ import com.crud.rental.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -58,6 +59,17 @@ public class UserController {
             return ResponseEntity.status(401).build();
         }
         return ResponseEntity.ok(userMapper.mapToUserDto(user));
+    }
+
+    @PutMapping("/{userId}/admin")
+    public ResponseEntity<Void> setAdminRole(@PathVariable Long userId, @RequestParam boolean admin) throws UserNotFoundException {
+        String callerUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        User caller = userService.findByUsername(callerUsername);
+        if (caller == null || !caller.isAdmin()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        userService.setAdmin(userId, admin);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{userId}")

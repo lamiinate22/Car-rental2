@@ -32,6 +32,7 @@ export const api = {
 
   // Users
   getUsers: () => request('/users'),
+  setAdminRole: (id, admin) => request(`/users/${id}/admin?admin=${admin}`, { method: 'PUT' }),
   deleteUser: (id) => request(`/users/${id}`, { method: 'DELETE' }),
 
   // Cars

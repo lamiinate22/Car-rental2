@@ -36,6 +36,12 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public void setAdmin(Long userId, boolean admin) throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        user.setAdmin(admin);
+        userRepository.save(user);
+    }
+
     public void login(User user) {
         // Logika logowania
         // Po udanym logowaniu ustaw `loggedInUser`

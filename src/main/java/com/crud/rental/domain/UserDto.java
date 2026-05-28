@@ -1,5 +1,6 @@
 package com.crud.rental.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,5 +13,6 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String username;
+    @JsonProperty("admin")
     private boolean isAdmin;
 }
