@@ -37,6 +37,12 @@ public class Reservation {
     @Column(name = "ENDED", nullable = false)
     private boolean ended;
 
+    @Column(name = "PAYMENT_STATUS")
+    private String paymentStatus;
+
+    @Column(name = "STRIPE_SESSION_ID")
+    private String stripeSessionId;
+
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;

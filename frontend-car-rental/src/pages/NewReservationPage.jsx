@@ -56,19 +56,21 @@ export default function NewReservationPage() {
     setSaving(true);
     setError('');
     try {
-      await api.addReservation({
-        startDate,
-        endDate,
-        totalPrice,
-        status: true,
+      const selectedOptionIds = options
+        .filter((o) => selectedOptions.includes(o.name))
+        .map((o) => o.id);
+
+      const { sessionUrl } = await api.createCheckoutSession({
         userId: user.id,
         carId: Number(carId),
-        optionNames: selectedOptions,
+        startDate,
+        endDate,
+        optionIds: selectedOptionIds,
       });
-      navigate('/reservations');
+
+      window.location.href = sessionUrl;
     } catch {
-      setError('Nie udało się złożyć rezerwacji. Spróbuj ponownie.');
-    } finally {
+      setError('Nie udało się zainicjować płatności. Spróbuj ponownie.');
       setSaving(false);
     }
   }
@@ -133,7 +135,7 @@ export default function NewReservationPage() {
           {error && <p className="form-error">{error}</p>}
 
           <button type="submit" className="btn btn--primary btn--full" disabled={saving}>
-            {saving ? 'Rezerwowanie…' : 'Zarezerwuj'}
+            {saving ? 'Przekierowanie do płatności…' : 'Zapłać i zarezerwuj'}
           </button>
         </form>
 

@@ -12,6 +12,7 @@ import ReservationDetailPage from './pages/ReservationDetailPage';
 import OptionsPage from './pages/OptionsPage';
 import UsersPage from './pages/UsersPage';
 import FuelPricesPage from './pages/FuelPricesPage';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
 
 export default function App() {
   return (
@@ -38,6 +39,9 @@ export default function App() {
 
             <Route path="/fuel-prices" element={
               <ProtectedRoute><FuelPricesPage /></ProtectedRoute>
+            } />
+            <Route path="/payment/success" element={
+              <ProtectedRoute><PaymentSuccessPage /></ProtectedRoute>
             } />
 
             <Route path="/options" element={
