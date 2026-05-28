@@ -19,6 +19,7 @@ export default function ReservationRow({ reservation, onDelete, isAdmin }) {
       </td>
       <td><StatusBadge active={reservation.status} /></td>
       <td className="res-row__price">{reservation.totalPrice?.toFixed(2)} zł</td>
+      {isAdmin && <td className="res-row__user">{reservation.username}</td>}
       {isAdmin && (
         <td onClick={(e) => e.stopPropagation()}>
           <button

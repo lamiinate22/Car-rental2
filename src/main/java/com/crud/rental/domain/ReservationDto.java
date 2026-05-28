@@ -21,5 +21,6 @@ public class ReservationDto {
     private Long userId;
     private Long carId;
     private List<Long> optionIds;
-    private List<String> optionNames = new ArrayList<>();;
+    private List<String> optionNames = new ArrayList<>();
+    private String username;
 }

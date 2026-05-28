@@ -11,6 +11,7 @@ export default function ReservationTable({ reservations, onDelete, isAdmin }) {
             <th>Termin</th>
             <th>Status</th>
             <th>Kwota</th>
+            {isAdmin && <th>Użytkownik</th>}
             {isAdmin && <th></th>}
           </tr>
         </thead>

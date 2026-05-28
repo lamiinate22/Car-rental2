@@ -63,7 +63,8 @@ public class ReservationMapper {
                 reservation.getUser().getId(),
                 reservation.getCar().getId(),
                 optionIds,
-                optionNames
+                optionNames,
+                reservation.getUser().getUsername()
         );
     }
 
