@@ -29,3 +29,18 @@
   font-weight: 700;
   color: var(--text);
 }
+
+.res-row--pending td {
+  background: #fffbeb;
+}
+
+.res-row--pending:hover td {
+  background: #fef3c7;
+}
+
+.res-row__timer {
+  font-size: 0.7rem;
+  color: #92400e;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}

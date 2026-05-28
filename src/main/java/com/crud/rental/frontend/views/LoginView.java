@@ -10,14 +10,17 @@ import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Route("login")
 public class LoginView extends VerticalLayout {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public LoginView(UserService userService) {
+    public LoginView(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
 
         TextField usernameField = new TextField("Username");
         PasswordField passwordField = new PasswordField("Password");
@@ -26,7 +29,7 @@ public class LoginView extends VerticalLayout {
             String password = passwordField.getValue();
             User user = userService.findByUsername(username);
 
-            if (user != null && user.getPassword().equals(password)) {
+            if (user != null && passwordEncoder.matches(password, user.getPassword())) {
                 VaadinSession.getCurrent().setAttribute(User.class, user);
                 getUI().ifPresent(ui -> ui.navigate("")); // Redirect to home or dashboard
             } else {

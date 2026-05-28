@@ -54,18 +54,21 @@ public class ReservationMapper {
                 .map(Option::getName)
                 .collect(Collectors.toList());
 
-        return new ReservationDto(
-                reservation.getId(),
-                reservation.getStartDate(),
-                reservation.getEndDate(),
-                reservation.getTotalPrice(),
-                reservation.isStatus(),
-                reservation.getUser().getId(),
-                reservation.getCar().getId(),
-                optionIds,
-                optionNames,
-                reservation.getUser().getUsername()
-        );
+        ReservationDto dto = new ReservationDto();
+        dto.setId(reservation.getId());
+        dto.setStartDate(reservation.getStartDate());
+        dto.setEndDate(reservation.getEndDate());
+        dto.setTotalPrice(reservation.getTotalPrice());
+        dto.setStatus(reservation.isStatus());
+        dto.setUserId(reservation.getUser().getId());
+        dto.setCarId(reservation.getCar().getId());
+        dto.setOptionIds(optionIds);
+        dto.setOptionNames(optionNames);
+        dto.setUsername(reservation.getUser().getUsername());
+        dto.setPaymentStatus(reservation.getPaymentStatus());
+        dto.setStripeSessionUrl(reservation.getStripeSessionUrl());
+        dto.setStripeSessionExpiresAt(reservation.getStripeSessionExpiresAt());
+        return dto;
     }
 
     public List<ReservationDto> mapToReservationDtoList(List<Reservation> reservationList) {

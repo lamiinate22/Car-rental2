@@ -12,6 +12,7 @@ export default function ReservationDetailPage() {
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(() => {
     api.getReservation(id)
@@ -23,6 +24,27 @@ export default function ReservationDetailPage() {
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [id]);
+
+  useEffect(() => {
+    if (reservation?.paymentStatus !== 'PENDING' || !reservation?.stripeSessionExpiresAt) return;
+
+    function tick() {
+      const diff = new Date(reservation.stripeSessionExpiresAt) - Date.now();
+      if (diff <= 0) {
+        setTimeLeft({ expired: true, minutes: 0, seconds: 0 });
+      } else {
+        setTimeLeft({
+          expired: false,
+          minutes: Math.floor(diff / 60000),
+          seconds: Math.floor((diff % 60000) / 1000),
+        });
+      }
+    }
+
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [reservation]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <p className="empty-state">Nie udało się załadować rezerwacji. Sprawdź połączenie z backendem.</p>;
@@ -41,8 +63,40 @@ export default function ReservationDetailPage() {
           <h1 className="page-title">Rezerwacja #{reservation.id}</h1>
           <p className="page-sub">{days} {days === 1 ? 'dzień' : 'dni'} · {reservation.startDate} → {reservation.endDate}</p>
         </div>
-        <StatusBadge active={reservation.status} />
+        <StatusBadge active={reservation.status} paymentStatus={reservation.paymentStatus} />
       </div>
+
+      {reservation.paymentStatus === 'PENDING' && (
+        <div className="payment-card">
+          <div className="payment-card__header">
+            <span className="payment-card__icon">💳</span>
+            <h2 className="payment-card__title">Dokończ płatność</h2>
+          </div>
+
+          {timeLeft?.expired ? (
+            <p className="payment-card__expired">
+              Sesja płatności wygasła. Wróć do listy i utwórz nową rezerwację.
+            </p>
+          ) : (
+            <>
+              <div className="payment-card__countdown">
+                <span className="payment-card__countdown-label">Pozostały czas</span>
+                <span className={`payment-card__countdown-time${timeLeft?.minutes < 5 ? ' payment-card__countdown-time--urgent' : ''}`}>
+                  {String(timeLeft?.minutes ?? '--').padStart(2, '0')}:{String(timeLeft?.seconds ?? '--').padStart(2, '0')}
+                </span>
+              </div>
+              {reservation.stripeSessionUrl && (
+                <a
+                  href={reservation.stripeSessionUrl}
+                  className="btn btn--primary btn--full"
+                >
+                  Przejdź do płatności →
+                </a>
+              )}
+            </>
+          )}
+        </div>
+      )}
 
       <div className="detail-grid">
         <div className="detail-card">

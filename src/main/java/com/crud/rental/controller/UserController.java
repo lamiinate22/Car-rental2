@@ -10,6 +10,7 @@ import com.crud.rental.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -52,7 +54,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody LoginRequest loginRequest) {
         User user = userService.findByUsername(loginRequest.getUsername());
-        if (user == null || !user.getPassword().equals(loginRequest.getPassword())) {
+        if (user == null || !passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             return ResponseEntity.status(401).build();
         }
         return ResponseEntity.ok(userMapper.mapToUserDto(user));

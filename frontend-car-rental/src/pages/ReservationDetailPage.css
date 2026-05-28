@@ -91,3 +91,72 @@
   border-radius: var(--radius);
   font-weight: 500;
 }
+
+.payment-card {
+  background: #fffbeb;
+  border: 1.5px solid #fcd34d;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.payment-card__icon {
+  font-size: 1.25rem;
+}
+
+.payment-card__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #92400e;
+  margin: 0;
+}
+
+.payment-card__countdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #fcd34d;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.payment-card__countdown-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #92400e;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.payment-card__countdown-time {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #92400e;
+}
+
+.payment-card__countdown-time--urgent {
+  color: #dc2626;
+  animation: pulse 1s infinite;
+}
+
+.payment-card__expired {
+  color: #dc2626;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

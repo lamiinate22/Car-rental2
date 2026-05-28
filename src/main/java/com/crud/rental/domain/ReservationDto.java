@@ -1,16 +1,15 @@
 package com.crud.rental.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class ReservationDto {
     private Long id;
@@ -23,4 +22,7 @@ public class ReservationDto {
     private List<Long> optionIds;
     private List<String> optionNames = new ArrayList<>();
     private String username;
+    private String paymentStatus;
+    private String stripeSessionUrl;
+    private LocalDateTime stripeSessionExpiresAt;
 }

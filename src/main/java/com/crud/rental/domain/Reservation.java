@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -42,6 +43,12 @@ public class Reservation {
 
     @Column(name = "STRIPE_SESSION_ID")
     private String stripeSessionId;
+
+    @Column(name = "STRIPE_SESSION_URL", length = 1024)
+    private String stripeSessionUrl;
+
+    @Column(name = "STRIPE_SESSION_EXPIRES_AT")
+    private LocalDateTime stripeSessionExpiresAt;
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
