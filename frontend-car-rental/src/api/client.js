@@ -11,16 +11,14 @@ async function request(path, options = {}) {
 
   const res = await fetch(`${BASE_URL}${path}`, { ...options, headers });
 
-  if (res.status === 401) {
-    localStorage.removeItem('car_rental_token');
-    localStorage.removeItem('car_rental_user');
-    window.location.href = '/login';
-    return;
-  }
-
   if (!res.ok) {
     const err = new Error(`HTTP ${res.status}`);
     err.status = res.status;
+    if (res.status === 401 && path !== '/api/auth/login') {
+      localStorage.removeItem('car_rental_token');
+      localStorage.removeItem('car_rental_user');
+      window.location.href = '/login';
+    }
     throw err;
   }
   const text = await res.text();

@@ -4,8 +4,8 @@ import com.crud.rental.repository.UserRepository;
 import com.crud.rental.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -16,12 +16,12 @@ public class AuthController {
     private final UserRepository userRepository;
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername());
         if (user == null || !user.getPassword().equals(request.getPassword())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         String token = jwtService.generateToken(user.getUsername());
-        return new AuthResponse(token, user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(), user.isAdmin());
+        return ResponseEntity.ok(new AuthResponse(token, user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(), user.isAdmin()));
     }
 }
