@@ -1,10 +1,23 @@
 const BASE_URL = 'http://localhost:8080';
 
+function getToken() {
+  return localStorage.getItem('car_rental_token');
+}
+
 async function request(path, options = {}) {
-  const res = await fetch(`${BASE_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...options.headers },
-    ...options,
-  });
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json', ...options.headers };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const res = await fetch(`${BASE_URL}${path}`, { ...options, headers });
+
+  if (res.status === 401) {
+    localStorage.removeItem('car_rental_token');
+    localStorage.removeItem('car_rental_user');
+    window.location.href = '/login';
+    return;
+  }
+
   if (!res.ok) {
     const err = new Error(`HTTP ${res.status}`);
     err.status = res.status;
@@ -15,10 +28,12 @@ async function request(path, options = {}) {
 }
 
 export const api = {
+  // Auth
+  login: (body) => request('/api/auth/login', { method: 'POST', body: JSON.stringify(body) }),
+  register: (body) => request('/users/register', { method: 'POST', body: JSON.stringify(body) }),
+
   // Users
   getUsers: () => request('/users'),
-  login: (body) => request('/users/login', { method: 'POST', body: JSON.stringify(body) }),
-  register: (body) => request('/users/register', { method: 'POST', body: JSON.stringify(body) }),
   deleteUser: (id) => request(`/users/${id}`, { method: 'DELETE' }),
 
   // Cars

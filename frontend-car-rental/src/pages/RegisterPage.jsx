@@ -20,7 +20,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       await register(form.firstName, form.lastName, form.username, form.password);
-      navigate('/');
+      navigate('/login');
     } catch {
       setError('Rejestracja nie powiodła się. Sprawdź dane i spróbuj ponownie.');
     } finally {

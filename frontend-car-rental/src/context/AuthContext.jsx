@@ -6,28 +6,31 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     try {
+      const token = localStorage.getItem('car_rental_token');
       const stored = localStorage.getItem('car_rental_user');
-      return stored ? JSON.parse(stored) : null;
+      return token && stored ? JSON.parse(stored) : null;
     } catch {
       return null;
     }
   });
 
-  async function login(username, password) {
-    const data = await api.login({ username, password });
-    localStorage.setItem('car_rental_user', JSON.stringify(data));
-    setUser(data);
-    return data;
+  async function login(email, password) {
+    const data = await api.login({ email, password });
+    // data = { token, email, admin }
+    localStorage.setItem('car_rental_token', data.token);
+    const userObj = { email: data.email, admin: data.admin };
+    localStorage.setItem('car_rental_user', JSON.stringify(userObj));
+    setUser(userObj);
+    return userObj;
   }
 
   async function register(firstName, lastName, username, password) {
-    const data = await api.register({ firstName, lastName, username, password });
-    localStorage.setItem('car_rental_user', JSON.stringify(data));
-    setUser(data);
-    return data;
+    await api.register({ firstName, lastName, username, password });
+    // backend nie zwraca tokena przy rejestracji - przekieruj do logowania
   }
 
   function logout() {
+    localStorage.removeItem('car_rental_token');
     localStorage.removeItem('car_rental_user');
     setUser(null);
   }
