@@ -12,7 +12,7 @@ Car Rental is an advanced car rental management system that allows users to book
 
 ## Application Architecture
 
-The application consists of a front-end and a back-end. The front-end is built with **Vaadin**, which allows for the creation of interactive and dynamic user interfaces without the need for JavaScript. The back-end is based on **Spring Boot**, providing a solid and scalable server-side solution, database management, and RESTful API services.
+The application consists of a front-end and a back-end. The front-end is built with **React** (Vite), providing a fast and modern single-page application experience. The back-end is based on **Spring Boot**, providing a solid and scalable server-side solution, database management, and RESTful API services.
 
 ## Reservation Process
 
@@ -26,7 +26,7 @@ The application consists of a front-end and a back-end. The front-end is built w
 
 - **Java**: The main programming language used for building the application's logic and database integration.
 - **Spring Boot**: A framework used to develop the back-end application. It provides support for creating RESTful APIs, dependency management, and database integration.
-- **Vaadin**: A front-end framework used to build dynamic and interactive user interfaces in Java.
+- **React + Vite**: A front-end stack used to build fast, dynamic, and interactive user interfaces in JavaScript/TypeScript.
 - **MySQL**: A database management system used to store application data such as users, reservations, cars, and extra options.
 - **Hibernate**: An ORM (Object-Relational Mapping) framework used for mapping Java objects to relational database structures.
 - **Maven**: A project management and dependency management tool.
@@ -56,7 +56,7 @@ The application consists of a front-end and a back-end. The front-end is built w
 - **Car Status Update**: After the reservation ends, the system automatically updates the car's status, including mileage and availability.
 - **Data Security**: The application ensures data security through authorization and authentication mechanisms, as well as encryption of sensitive data.
 - **Fuel Type Management**: The system considers various fuel types when calculating reservation costs, based on the latest fuel prices across different regions.
-- **Intuitive User Interface**: Thanks to Vaadin, the application offers a modern, intuitive user interface that simplifies system usage for both users and administrators.
+- **Intuitive User Interface**: Thanks to React and Vite, the application offers a modern, fast, and intuitive user interface that simplifies system usage for both users and administrators.
 
 ## External Integrations
 
